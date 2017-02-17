@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Interview.Models.RangeItemViewModel>
+
+
+@foreach (var item in Model) {
+    <div class="list_range_item"> 
+        <div class="list_range_item_head list_range_item_head_small">
+            <p class="centered">@Html.DisplayFor(modelItem => item.Name)</p>
+        </div>
+        <input type="checkbox" class="toggle" name="@item.RangeId" id="@item.RangeId" />
+        <label  class="list_range_item_head" for="@item.RangeId">@Html.DisplayFor(modelItem => item.Name)</label>
+        <div class="list_range_item_body">
+            <img class="centered" src="@Url.Content("~/content/images/vehicles/" + (item.ImageFileName ?? "car-placeholder.png"))" alt="Image" />
+        </div>
+    </div>
+}
+

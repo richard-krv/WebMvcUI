@@ -1,0 +1,11 @@
+﻿@model Interview.Models.ManufacturerViewModel
+
+<div class="centered icon-@Model.Name"></div>
+
+<div class="list_range_item_title"><P class="centered">Cars in the @Model.Name ranges</P></div>
+<div class="list_range_container">
+    @if (Model.RangeItems != null)
+    {
+        @Html.Partial("RangeItems", Model.RangeItems)
+    }
+</div>
