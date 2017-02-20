@@ -1,11 +1,14 @@
 ﻿using Interview.ModelMapping;
 using Interview.Models;
 using Interview.Services.Contracts;
+using Interview.Validation;
+using System.Text.RegularExpressions;
 using System.Web.Mvc;
 
 namespace Interview.Controllers
 {
     [HandleError]
+    [ActionParametersRegexValidator("[a-zA-Z]+", RegexOptions.IgnoreCase, "Invalid automaker name")]
     public class RangeController : Controller
     {
         private IModelRangeService modelRangeService;
@@ -19,6 +22,7 @@ namespace Interview.Controllers
         {
             return View(GetManufacturer(name));
         }
+        //[Route("{id:values(ford|bmw|audi)}")]
         public ActionResult ListStriptUrl(string id)
         {
             if (id == "Home" || string.IsNullOrEmpty(id)) return RedirectToAction("Index", "Home");

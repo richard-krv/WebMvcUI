@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Interview.Validation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Routing;
 using System.Web.Routing;
 
 namespace Interview
@@ -25,6 +27,10 @@ namespace Interview
                 defaults: new { controller = "Range", action = "ListStriptUrl", id = "Home" },
                 constraints: new { id = @"^\w+|W+$" }
             );
+
+            var constraintsResolver = new DefaultInlineConstraintResolver();
+            constraintsResolver.ConstraintMap.Add("values", typeof(ValuesConstraint));
+            routes.MapMvcAttributeRoutes(constraintsResolver);
         }
     }
 }
