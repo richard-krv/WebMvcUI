@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
+using Interview.Models;
+using Interview.Services.Models;
 using System.Linq;
-using System.Web;
 
 namespace Interview.ModelMapping
 {
@@ -18,11 +17,13 @@ namespace Interview.ModelMapping
             AllowNullCollections = true;
             AllowNullDestinationValues = true;
 
-            CreateMap<Services.Models.ModelRangeItem, Models.RangeItemViewModel>()
-                .ForMember(m => m.ImageFileName, opt => opt.MapFrom(s => s.ImageFileName));
+            CreateMap<ModelRangeItem, RangeItemViewModel>()
+                //.ForMember(m => m.ImageFileName, opt => opt.MapFrom(s => s.ImageFileName))
+                .ReverseMap();
 
-            CreateMap<Services.Models.ManufacturerModelRange, Models.ManufacturerViewModel>()
-                .ForMember(m => m.RangeItems, opt => opt.MapFrom(s => s.ModelRangeItems.ToList()));
+            CreateMap<ManufacturerModelRange, ManufacturerViewModel>()
+                .ForMember(m => m.RangeItems, opt => opt.MapFrom(s => s.ModelRangeItems.ToList()))
+                .ReverseMap();
 
         }
     }

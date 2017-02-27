@@ -15,14 +15,13 @@ namespace Interview.Controllers
         public RangeController(IModelRangeService modelRangeService)
         {
             this.modelRangeService = modelRangeService;
-            AutoMapper.Mapper.Initialize(config => config.AddProfile<ManufacturerRangeServiceToViewMappingProfile>());
         }
         // GET /Range/List?name=manufacturer
         public ActionResult List(string name)
         {
             return View(GetManufacturer(name));
         }
-        //[Route("{id:values(ford|bmw|audi)}")]
+
         public ActionResult ListStriptUrl(string id)
         {
             if (id == "Home" || string.IsNullOrEmpty(id)) return RedirectToAction("Index", "Home");
@@ -41,7 +40,7 @@ namespace Interview.Controllers
         protected ManufacturerViewModel HandleInvalidModel(ManufacturerViewModel model, string queryName)
         {
             if (model == null)
-                model = new Models.ManufacturerViewModel() { Name = queryName };
+                model = new ManufacturerViewModel() { Name = queryName };
             return model;
         }
     }

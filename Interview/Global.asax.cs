@@ -12,10 +12,12 @@ using System.Web.Routing;
 
 namespace Interview
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {
+            // doesn't work due to automapper issue - now works when initialize
+            // immediately before mapping, not here
             AutoMapper.Mapper.Initialize(config => config.AddProfile<ManufacturerRangeServiceToViewMappingProfile>());
 
             Database.SetInitializer<ManufacturerDataContext>(null);
