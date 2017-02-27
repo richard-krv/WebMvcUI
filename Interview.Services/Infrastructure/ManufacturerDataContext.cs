@@ -11,7 +11,10 @@ namespace Interview.Services.Infrastructure
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Manufacturer>().ToTable("Manufacturer", "dbo");
+            modelBuilder.Entity<Manufacturer>().ToTable("Manufacturer", "dbo")
+                .HasMany(r => r.Ranges)
+                .WithRequired(nav => nav.Manufacturer)
+                .HasForeignKey(r => r.ManufacturerId);
             modelBuilder.Entity<Range>().ToTable("Range", "dbo");
 
             base.OnModelCreating(modelBuilder);

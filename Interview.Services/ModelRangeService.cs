@@ -20,21 +20,11 @@ namespace Interview.Services
             ManufacturerModelRange result;
             using (var dataContext = GetDataContext())
             {
-                var man = from m in dataContext.Manufacturers
-                        where m.ManufacturerName == manufacturerName
-                        select m;
+                var man = from m in dataContext.Manufacturers.Include("Ranges")
+                          where m.ManufacturerName == manufacturerName
+                          select m;
 
-                var manuf = man.FirstOrDefault();
-
-                if (manuf != null)
-                {
-                    var rng = from r in dataContext.Ranges
-                              where r.ManufacturerId == manuf.ManufacturerId
-                              select r;
-
-                    manuf.Ranges = rng.ToList();
-                }
-                result = MappingConfig.Map<ManufacturerModelRange>(manuf);
+                result = MappingConfig.Map<ManufacturerModelRange>(man.FirstOrDefault());
             }
             return result;
         }
