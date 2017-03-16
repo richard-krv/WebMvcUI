@@ -6,7 +6,7 @@ namespace Interview.Services.Mapping
     {
         public override string ProfileName
         {
-            get { return typeof(ManufacturerRangeMappingProfile).Name; }
+            get { return nameof(ManufacturerRangeMappingProfile); }
         }
 
         public ManufacturerRangeMappingProfile()
